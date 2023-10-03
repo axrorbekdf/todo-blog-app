@@ -2,7 +2,7 @@
   <div class="container mt-4 pt-4">
     <div class="row justify-content-center">
       <div class="col-8 p-2">
-        <AppInfo />
+        <AppInfo :data="movies"/>
       </div>
 
       <div class="col-8 p-2">
@@ -17,7 +17,7 @@
       <div class="col-8 p-2">
         <div class="card">
             <div class="card-body">
-              <MovieList />
+              <MovieList :data="movies" />
             </div>
         </div>
       </div>
@@ -48,6 +48,55 @@
       AppFilter,
       MovieList,
       MovieAddForm
+    },
+
+    data(){
+        return {
+            movies: [
+                {
+                    name: "Omar",
+                    viewers: 134,
+                    like: true,
+                    favorite: false
+                },
+                {
+                    name: "Empire of osman",
+                    viewers: 789,
+                    like: false,
+                    favorite: true
+                },
+                {
+                    name: "Ertugrul",
+                    viewers: 159,
+                    like: false,
+                    favorite: false
+                },
+                {
+                    name: "Game of Transformer",
+                    viewers: 103,
+                    like: true,
+                    favorite: true
+                },
+                {
+                    name: "Game of Transformer",
+                    viewers: 103,
+                    like: true,
+                    favorite: true
+                },
+                {
+                    name: "Game of Transformer",
+                    viewers: 103,
+                    like: true,
+                    favorite: true
+                },
+                {
+                    name: "Game of Transformer",
+                    viewers: 103,
+                    like: true,
+                    favorite: true
+                }
+            ]
+        }
     }
   }
 </script>

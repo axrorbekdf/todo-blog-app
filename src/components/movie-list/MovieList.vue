@@ -2,11 +2,7 @@
     <div>
         <ul class="list-group">
 
-            <MovieListItem/>
-            <MovieListItem/>
-            <MovieListItem/>
-            <MovieListItem/>
-            <MovieListItem/>
+            <MovieListItem v-for="movie,key in data" :movie="movie" :key="key"/>
 
         </ul>
     </div>
@@ -16,6 +12,12 @@ import MovieListItem from "@/components/movie-list-item/MovieListItem.vue"
 export default {
     components:{
         MovieListItem
+    },
+    props: {
+        data: {
+            type: Array,
+            required: true
+        }
     }
 }
 </script>
