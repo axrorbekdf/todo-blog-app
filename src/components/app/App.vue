@@ -102,7 +102,20 @@
     methods:{
       addNewMovie(data){
         this.movies.push(data);
-        // console.log(data)
+        
+      },
+      
+      changeSocial(data, event){
+        switch(event){
+          case 'like': 
+            data.like = !data.like
+            break;
+          case 'favorite':
+            data.favorite = !data.favorite
+            break
+        }
+        
+        return data
       }
     }
   }
