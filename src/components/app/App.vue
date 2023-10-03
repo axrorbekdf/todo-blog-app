@@ -25,7 +25,7 @@
       <div class="col-8 p-2">
         <div class="card">
             <div class="card-body">
-              <MovieAddForm />
+              <MovieAddForm @createMovie="addNewMovie" />
             </div>
         </div>
       </div>
@@ -97,6 +97,13 @@
                 }
             ]
         }
+    },
+
+    methods:{
+      addNewMovie(data){
+        this.movies.push(data);
+        // console.log(data)
+      }
     }
   }
 </script>
