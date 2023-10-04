@@ -29,6 +29,9 @@ export default {
     },
     methods: {
         addMovie(){
+
+            if(!this.name || !this.viewers) return false;
+
             const newMovie = {
                 id: (new Date()).getTime(),
                 name: this.name,

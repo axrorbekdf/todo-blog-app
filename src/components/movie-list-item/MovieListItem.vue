@@ -12,7 +12,7 @@
                     <button :class="[movie.favorite ? favoriteClass:blueClass]" @click="socialEvenChange('favorite')" class="btn btn-default btn-sm btn-cookie">
                         <i class="fa fa-cookie"></i>
                     </button>
-                    <button class="btn btn-default btn-sm btn-trash">
+                    <button class="btn btn-default btn-sm btn-trash" @click="socialEvenChange('delete')">
                         <i class="fa fa-trash" :class="[redClass]"></i>
                     </button>
                     <button class="btn btn-default btn-sm btn-start">
