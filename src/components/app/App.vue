@@ -9,7 +9,7 @@
         <div class="card">
             <div class="card-body">
               <SearchPanel @setSearch="setSearchkey"/>
-              <AppFilter @setFilter="setFilterkey"/>
+              <AppFilter @setFilter="setFilterkey" :filterName="filterKey"/>
             </div>
         </div>
       </div>
@@ -17,7 +17,7 @@
       <div class="col-8 p-2">
         <div class="card">
             <div class="card-body">
-              <MovieList :data="searchHandler(movies, searchKey)" @socialEvent="changeSocial" />
+              <MovieList :data="filterHandler(searchHandler(movies, searchKey), filterKey)" @socialEvent="changeSocial" />
             </div>
         </div>
       </div>
@@ -57,14 +57,14 @@
                     id: 1,
                     name: "Omar",
                     viewers: 134,
-                    like: false,
+                    like: true,
                     favorite: false
                 },
                 {
                     id: 2,
                     name: "Empire of osman",
                     viewers: 789,
-                    like: false,
+                    like: true,
                     favorite: false
                 },
                 {   
@@ -83,7 +83,7 @@
                 }
             ],
             searchKey: '',
-            filterKey: 0
+            filterKey: 'all'
         }
     },
 
@@ -125,28 +125,22 @@
       },
 
       filterHandler(movies, filterKey){
-        if(searchKey.length == 0){
+        if(filterKey == 'all'){
           return movies
         }
 
         switch(filterKey){
-          case 1: 
-            movies.filter(c => {
-              return c.favorite;
-            }) 
-            break;
-          case 2: 
-            movies.filter(c => {
-              return c.like;
-            }) 
-            break;
+          case 'popular': 
+            return movies.filter(c => c.like) 
+          case 'mostViewers': 
+            return movies.filter(c => c.viewers > 500) 
+          default:
+            return movies
         }
-
-        return movies;
       },
 
       setSearchkey(key){
-        this.searchKey = key;
+        this.searchKey = key
       },
       setFilterkey(key){
         this.filterKey = key
