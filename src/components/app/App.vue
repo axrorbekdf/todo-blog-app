@@ -17,7 +17,7 @@
       <div class="col-8 p-2">
         <div class="card">
             <div class="card-body">
-              <MovieList :data="movies" />
+              <MovieList :data="movies" @socialEvent="changeSocial" />
             </div>
         </div>
       </div>
@@ -25,7 +25,7 @@
       <div class="col-8 p-2">
         <div class="card">
             <div class="card-body">
-              <MovieAddForm @createMovie="addNewMovie" />
+              <MovieAddForm @createMovie="addNewMovie"/>
             </div>
         </div>
       </div>
@@ -54,46 +54,32 @@
         return {
             movies: [
                 {
+                    id: 1,
                     name: "Omar",
                     viewers: 134,
-                    like: true,
+                    like: false,
                     favorite: false
                 },
                 {
+                    id: 2,
                     name: "Empire of osman",
                     viewers: 789,
                     like: false,
-                    favorite: true
+                    favorite: false
                 },
-                {
+                {   
+                    id: 3,
                     name: "Ertugrul",
                     viewers: 159,
                     like: false,
                     favorite: false
                 },
                 {
+                    id: 4,
                     name: "Game of Transformer",
                     viewers: 103,
-                    like: true,
-                    favorite: true
-                },
-                {
-                    name: "Game of Transformer",
-                    viewers: 103,
-                    like: true,
-                    favorite: true
-                },
-                {
-                    name: "Game of Transformer",
-                    viewers: 103,
-                    like: true,
-                    favorite: true
-                },
-                {
-                    name: "Game of Transformer",
-                    viewers: 103,
-                    like: true,
-                    favorite: true
+                    like: false,
+                    favorite: false
                 }
             ]
         }
@@ -106,16 +92,20 @@
       },
       
       changeSocial(data, event){
-        switch(event){
-          case 'like': 
-            data.like = !data.like
-            break;
-          case 'favorite':
-            data.favorite = !data.favorite
-            break
-        }
-        
-        return data
+        this.movies = this.movies.map(function(movie){
+          if(movie.id == data.id){
+            switch(event){
+              case 'like': 
+                movie.like = !movie.like
+                break;
+              case 'favorite':
+                movie.favorite = !movie.favorite
+                break;
+            }
+          }
+
+          return movie;
+        })
       }
     }
   }

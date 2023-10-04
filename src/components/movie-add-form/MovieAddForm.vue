@@ -30,6 +30,7 @@ export default {
     methods: {
         addMovie(){
             const newMovie = {
+                id: (new Date()).getTime(),
                 name: this.name,
                 viewers: this.viewers,
                 like: false,
