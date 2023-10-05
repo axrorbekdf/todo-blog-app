@@ -1,9 +1,8 @@
 <template>
     <div class="btn-group">
         <Button type="button" @click="setFilterKeyValue('all')" :class="[filterName=='all' ? 'btn-primary':'btn-outline-primary']">Barchasi kinolar</Button>
-        
-        <button type="button" @click="setFilterKeyValue('popular')" class="btn btn-sm" :class="[filterName=='popular' ? 'btn-primary':'btn-outline-primary']">Mashhur kinolar</button>
-        <button type="button" @click="setFilterKeyValue('mostViewers')" class="btn btn-sm" :class="[filterName=='mostViewers' ? 'btn-primary':'btn-outline-primary']">Eng ko'p ko'rilgan kinolar</button>
+        <Button type="button" @click="setFilterKeyValue('popular')" :class="[filterName=='popular' ? 'btn-primary':'btn-outline-primary']">Mashhur kinolar</Button>
+        <Button type="button" @click="setFilterKeyValue('mostViewers')" :class="[filterName=='mostViewers' ? 'btn-primary':'btn-outline-primary']">Eng ko'p ko'rilgan kinolar</Button>
     </div>
 </template>
 <script>
