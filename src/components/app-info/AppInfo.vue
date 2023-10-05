@@ -1,11 +1,7 @@
 <template>
     <div>
-        <div class="card">
-            <div class="card-body">
-                <h1 class="card-title">Barcha kinolar: {{ allMovies }}</h1>
-                <h4 class="card-subtitle mb-2 text-body-secondary">Favorite kinolar: {{ favoriteMovies }}</h4>
-            </div>
-        </div>
+        <h1 class="card-title">Barcha kinolar: {{ allMovies }}</h1>
+        <h4 class="card-subtitle mb-2 text-body-secondary">Favorite kinolar: {{ favoriteMovies }}</h4>
     </div>
 </template>
 

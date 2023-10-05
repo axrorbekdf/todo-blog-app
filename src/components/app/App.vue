@@ -1,34 +1,22 @@
 <template>
   <div class="container mt-4 pt-4">
     <div class="row justify-content-center">
-      <div class="col-8 p-2">
-        <AppInfo :data="movies"/>
-      </div>
+      <Box>
+          <AppInfo :data="movies"/>
+      </Box>
 
-      <div class="col-8 p-2">
-        <div class="card">
-            <div class="card-body">
-              <SearchPanel @setSearch="setSearchkey"/>
-              <AppFilter @setFilter="setFilterkey" :filterName="filterKey"/>
-            </div>
-        </div>
-      </div>
+      <Box>
+          <SearchPanel @setSearch="setSearchkey"/>
+          <AppFilter @setFilter="setFilterkey" :filterName="filterKey"/>
+      </Box>
 
-      <div class="col-8 p-2">
-        <div class="card">
-            <div class="card-body">
-              <MovieList :data="filterHandler(searchHandler(movies, searchKey), filterKey)" @socialEvent="changeSocial" />
-            </div>
-        </div>
-      </div>
+      <Box>
+          <MovieList :data="filterHandler(searchHandler(movies, searchKey), filterKey)" @socialEvent="changeSocial" />
+      </Box>
 
-      <div class="col-8 p-2">
-        <div class="card">
-            <div class="card-body">
-              <MovieAddForm @createMovie="addNewMovie"/>
-            </div>
-        </div>
-      </div>
+      <Box>
+          <MovieAddForm @createMovie="addNewMovie"/>
+      </Box>
 
     </div>
   </div>
@@ -40,6 +28,7 @@
   import AppFilter from "@/components/app-filter/AppFilter.vue"
   import MovieList from "@/components/movie-list/MovieList.vue"
   import MovieAddForm from "@/components/movie-add-form/MovieAddForm.vue"
+  import Box from '@/ui-components/Box.vue'
 
   export  default{
     components: {
@@ -47,7 +36,8 @@
       SearchPanel,
       AppFilter,
       MovieList,
-      MovieAddForm
+      MovieAddForm,
+      Box
     },
 
     data(){

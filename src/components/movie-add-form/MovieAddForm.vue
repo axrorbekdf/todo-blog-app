@@ -11,13 +11,18 @@
                 <input v-model="viewers" type="number" class="form-control" id="inputPassword2" placeholder="Necha marta ko'rilgan...">
             </div>
             <div class="col-2">
-                <button type="submit" @click="addMovie" class="btn btn-primary mb-3">Qo'shish</button>
+                <Button type="submit" @click="addMovie" class='btn-primary'>Qo'shish</Button>
             </div>
         </form>
     </div>
 </template>
 <script>
+import Button from '@/ui-components/Button.vue';
+
 export default {
+    components:{
+        Button
+    },
     props: {
 
     },

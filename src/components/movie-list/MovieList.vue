@@ -1,9 +1,7 @@
 <template>
     <div>
         <ul class="list-group">
-
             <MovieListItem v-for="movie,key in data" :movie="movie" :key="key" @socialEventItem="changeSocialItem"/>
-
         </ul>
     </div>
 </template>
