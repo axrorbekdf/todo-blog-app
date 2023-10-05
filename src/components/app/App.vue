@@ -28,7 +28,7 @@
   import AppFilter from "@/components/app-filter/AppFilter.vue"
   import MovieList from "@/components/movie-list/MovieList.vue"
   import MovieAddForm from "@/components/movie-add-form/MovieAddForm.vue"
-  import Box from '@/ui-components/Box.vue'
+
 
   export  default{
     components: {
@@ -36,8 +36,7 @@
       SearchPanel,
       AppFilter,
       MovieList,
-      MovieAddForm,
-      Box
+      MovieAddForm
     },
 
     data(){

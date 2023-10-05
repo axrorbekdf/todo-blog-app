@@ -6,12 +6,9 @@
     </div>
 </template>
 <script>
-import Button from '@/ui-components/Button.vue'
 
 export default {
-    components:{
-        Button
-    },
+
     props:{
         filterName: {
             type: String,

@@ -4,5 +4,8 @@ import uiComponents from '@/ui-components/index.js'
 
 const app = createApp(App)
 
-app.component(uiComponents)
+uiComponents.map(component => {
+    app.component(component.name, component)
+})
+
 app.mount('#app')
