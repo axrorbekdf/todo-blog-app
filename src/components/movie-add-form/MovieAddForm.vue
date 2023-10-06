@@ -4,11 +4,11 @@
         <form class="row" @submit.prevent>
             <div class="col-5" >
                 <label for="staticEmail2" class="visually-hidden">Qanday kino...</label>
-                <input v-model="name" type="text" class="form-control" id="staticEmail2" placeholder="Qanday kino...">
+                <Input v-model="name" type="text" class="form-control" id="staticEmail2" placeholder="Qanday kino..."/>
             </div>
             <div class="col-5">
                 <label for="inputPassword2" class="visually-hidden">Necha marta ko'rilgan...</label>
-                <input v-model="viewers" type="number" class="form-control" id="inputPassword2" placeholder="Necha marta ko'rilgan...">
+                <Input v-model="viewers" type="number" class="form-control" id="inputPassword2" placeholder="Necha marta ko'rilgan..."/>
             </div>
             <div class="col-2">
                 <Button type="submit" @click="addMovie" class='btn-primary'>Qo'shish</Button>
@@ -20,9 +20,6 @@
 
 export default {
 
-    props: {
-
-    },
     data(){
         return {
             name: "",
