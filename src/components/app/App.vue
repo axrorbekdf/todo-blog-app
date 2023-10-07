@@ -4,13 +4,21 @@
       <Box>
           <AppInfo :data="movies"/>
       </Box>
-
+      
       <Box>
           <SearchPanel @setSearch="setSearchkey"/>
           <AppFilter @setFilter="setFilterkey" :filterName="filterKey"/>
       </Box>
+      
+      <Box v-if="!movies.length && !isLoading" class="text-center">
+        <h5 class="text-danger">Kinolar mavjud emas!</h5>
+      </Box>
 
-      <Box>
+      <Box v-else-if="isLoading" class="text-center">
+        <Spinner/>
+      </Box>
+
+      <Box v-else>
           <MovieList :data="filterHandler(searchHandler(movies, searchKey), filterKey)" @socialEvent="changeSocial" />
       </Box>
 
@@ -28,6 +36,7 @@
   import AppFilter from "@/components/app-filter/AppFilter.vue"
   import MovieList from "@/components/movie-list/MovieList.vue"
   import MovieAddForm from "@/components/movie-add-form/MovieAddForm.vue"
+  import axios from "axios"
 
 
   export  default{
@@ -38,45 +47,43 @@
       MovieList,
       MovieAddForm
     },
+    mounted(){
+      this.loadDataFromApi()
+    },
 
     data(){
         return {
-            movies: [
-                {
-                    id: 1,
-                    name: "Omar",
-                    viewers: 134,
-                    like: true,
-                    favorite: false
-                },
-                {
-                    id: 2,
-                    name: "Empire of osman",
-                    viewers: 789,
-                    like: true,
-                    favorite: false
-                },
-                {   
-                    id: 3,
-                    name: "Ertugrul",
-                    viewers: 159,
-                    like: false,
-                    favorite: false
-                },
-                {
-                    id: 4,
-                    name: "Game of Transformer",
-                    viewers: 103,
-                    like: false,
-                    favorite: false
-                }
-            ],
+            movies: [],
             searchKey: '',
-            filterKey: 'all'
+            filterKey: 'all',
+            isLoading: false,
         }
     },
 
     methods:{
+
+      async loadDataFromApi(){
+        try {
+          this.isLoading = true
+          const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+          const newDataGenerate = response.data.map(item => ({
+            id: item.id,
+            name: item.title,
+            viewers: item.id*10,
+            like: false,
+            favorite: false
+          }))
+
+          this.movies = newDataGenerate
+        } catch (error) {
+            alert(error.message)
+        } finally{
+          this.isLoading = false
+        }
+
+
+      },
+
       addNewMovie(data){
         this.movies.push(data);
         
