@@ -19,6 +19,19 @@
       </Box>
 
       <Box v-else>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+              <!-- <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+              </li> -->
+              <li class="page-item" v-for="item in totalPage" :class="{'active': item == page}" :key="item">
+                <a @click="changePageHanfler(item)" class="page-link" href="#">{{item}}</a>
+              </li>
+              <!-- <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li> -->
+            </ul>
+          </nav>
           <MovieList :data="filterHandler(searchHandler(movies, searchKey), filterKey)" @socialEvent="changeSocial" />
       </Box>
 
@@ -50,13 +63,18 @@
     mounted(){
       this.loadDataFromApi()
     },
-
+    // updated(){
+    //   this.loadDataFromApi()
+    // },
     data(){
         return {
             movies: [],
             searchKey: '',
             filterKey: 'all',
             isLoading: false,
+            limit: 10,
+            page: 1,
+            totalPage: 0
         }
     },
 
@@ -65,7 +83,12 @@
       async loadDataFromApi(){
         try {
           this.isLoading = true
-          const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+          const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+            params: {
+              _limit: this.limit,
+              _page: this.page
+            }
+          })
           const newDataGenerate = response.data.map(item => ({
             id: item.id,
             name: item.title,
@@ -74,7 +97,9 @@
             favorite: false
           }))
 
+          this.totalPage = Math.ceil(response.headers['x-total-count'] / this.limit)
           this.movies = newDataGenerate
+
         } catch (error) {
             alert(error.message)
         } finally{
@@ -84,9 +109,13 @@
 
       },
 
+      changePageHanfler(page){
+        this.page = page
+        this.loadDataFromApi()
+      },
+
       addNewMovie(data){
         this.movies.push(data);
-        
       },
       
       changeSocial(data, event){
@@ -138,6 +167,7 @@
       setSearchkey(key){
         this.searchKey = key
       },
+
       setFilterkey(key){
         this.filterKey = key
       }
