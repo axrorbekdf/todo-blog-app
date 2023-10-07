@@ -10,6 +10,10 @@
           <AppFilter @setFilter="setFilterkey" :filterName="filterKey"/>
       </Box>
       
+      <Box >
+        <Pagination @changePageHandler="changePageHandler" :totalPage="totalPage" :page="page"/>
+      </Box>
+
       <Box v-if="!movies.length && !isLoading" class="text-center">
         <h5 class="text-danger">Kinolar mavjud emas!</h5>
       </Box>
@@ -19,19 +23,6 @@
       </Box>
 
       <Box v-else>
-          <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-end">
-              <!-- <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-              </li> -->
-              <li class="page-item" v-for="item in totalPage" :class="{'active': item == page}" :key="item">
-                <a @click="changePageHanfler(item)" class="page-link" href="#">{{item}}</a>
-              </li>
-              <!-- <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-              </li> -->
-            </ul>
-          </nav>
           <MovieList :data="filterHandler(searchHandler(movies, searchKey), filterKey)" @socialEvent="changeSocial" />
       </Box>
 
@@ -63,9 +54,6 @@
     mounted(){
       this.loadDataFromApi()
     },
-    // updated(){
-    //   this.loadDataFromApi()
-    // },
     data(){
         return {
             movies: [],
@@ -76,6 +64,11 @@
             page: 1,
             totalPage: 0
         }
+    },
+    watch: {
+      page(){
+        this.loadDataFromApi()
+      }
     },
 
     methods:{
@@ -105,13 +98,10 @@
         } finally{
           this.isLoading = false
         }
-
-
       },
 
-      changePageHanfler(page){
+      changePageHandler(page){
         this.page = page
-        this.loadDataFromApi()
       },
 
       addNewMovie(data){
