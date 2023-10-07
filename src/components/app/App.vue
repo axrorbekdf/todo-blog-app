@@ -104,8 +104,13 @@
         this.page = page
       },
 
-      addNewMovie(data){
-        this.movies.push(data);
+      async addNewMovie(data){
+        try {
+          const response = await axios.post('https://jsonplaceholder.typicode.com/posts', data)
+          this.movies.push(response.data);
+        } catch (error) {
+          alert(error.message)
+        }
       },
       
       changeSocial(data, event){
@@ -125,9 +130,14 @@
         })
 
         if(event == 'delete'){
-          this.movies = this.movies.filter(function(movie){
-            return movie.id !== data.id
-          })
+          try {
+            const response = axios.delete(`https://jsonplaceholder.typicode.com/posts/${data.id}`)
+            this.movies = this.movies.filter(function(movie){
+              return movie.id !== data.id
+            })
+          } catch (error) {
+            alert(error.message)
+          }
         }
       },
 
